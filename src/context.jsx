@@ -89,8 +89,8 @@ class Explore extends React.Component {
             <main className='main'>
             <Grid container className='horiPadding vertPadding' spacing={0}>
             <div className='header'>
-                <h2 className='large'>Real-time tweets around the world</h2>
-                <h1 id='mainText' onClick={() => window.scrollTo(0,0)} className='large'>Globe</h1>
+                <h2 className='large'>Find like-minded people like you around the globe</h2>
+                <h1 id='mainText' onClick={() => window.scrollTo(0,0)} className='large'>Ideotracker</h1>
             </div>
         </Grid>
             </main>
@@ -116,6 +116,7 @@ class You extends React.Component {
             <main className='main'>
             <Grid container className='horiPadding vertPadding' spacing={0}>
             <div className='header'>
+                <h2 className='large'>Your ideology certificate</h2>
                 <h1 id='mainText' onClick={() => window.scrollTo(0,0)} className='large'>You</h1>
             </div>
         </Grid>

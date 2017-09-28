@@ -4,6 +4,8 @@
 
 @import url('https://cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css');
 
+@import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+
 /** https://sf.abarba.me/LICENSE.pdf */
 
 /** 1. Copy/import this file into your main css/scss file */
@@ -361,7 +363,7 @@ html, body {
 }
 
 
-.mdi {
+.mdi, .ion {
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -872,6 +874,7 @@ input {
   animation: pullFromBottom 1s ease;
   width: 100%;
   user-select: none;
+  pointer-events: none;
   &.oof {
     opacity: 0;
   }

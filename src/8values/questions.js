@@ -630,12 +630,21 @@ const questions = [
         }
     },
     {
-        "question": 'Do you believe the Jews are the main root of all problems?',
+        "question": 'Do you consider government important to have a function in a society?',
         "effect": {
-            "econ": 0,
-            "dipl": -10000,
-            "govt": -20,
-            "scty": -50
+            "econ": -10,
+            "dipl": 0,
+            "govt": -10,
+            "scty": 0
+        }
+    },
+    {
+        "question": 'Should income tax be minimal to ensure better private business budget?',
+        "effect": {
+            "econ": -10,
+            "dipl": 0,
+            "govt": 10,
+            "scty": 0
         }
     }
 ]

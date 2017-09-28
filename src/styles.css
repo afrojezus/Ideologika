@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i");
 @import url("https://cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css");
+@import url("https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css");
 /** https://sf.abarba.me/LICENSE.pdf */
 /** 1. Copy/import this file into your main css/scss file */
 /** 2. Change css font-family: to "SF Text", "SF Display" or "SF Mono" */
@@ -268,7 +269,7 @@ html, body {
     height: 92px;
     opacity: 1; } }
 
-.mdi {
+.mdi, .ion {
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -678,7 +679,8 @@ input {
   margin: -48px auto;
   animation: pullFromBottom 1s ease;
   width: 100%;
-  user-select: none; }
+  user-select: none;
+  pointer-events: none; }
   .bgheader.oof {
     opacity: 0; }
   .bgheader > .gradient {

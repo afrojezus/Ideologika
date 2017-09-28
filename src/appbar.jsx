@@ -58,8 +58,8 @@ export default class AppBar extends React.Component {
             </div>
             <div className='constantBar'>
                 <div className='identity'>
-                <h2>{this.state.ideology ? 'Your ideology' : 'You might be a'}</h2>
-                <h1>{this.state.ideology ? this.state.ideology : 'Cuck'}</h1>
+                <h2>{this.state.ideology ? 'Your ideology' : 'Get yourself an ideology first'}</h2>
+                <h1>{this.state.ideology ? this.state.ideology : null}</h1>
                 </div>
             </div>
         </div>
