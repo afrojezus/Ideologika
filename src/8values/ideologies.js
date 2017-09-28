@@ -407,7 +407,38 @@ const ideologies = [
             "govt": 50,
             "scty": 60
         },
-        'bg': 'http://scd.france24.com/en/files/imagecache/france24_ct_api_bigger_169/article/image/20170323_macron.jpg'
+        'bg': 'http://scd.france24.com/en/files/imagecache/france24_ct_api_bigger_169/article/image/20170323_macron.jpg',
+        'country': {
+            'NO': {
+                'Frp': {
+                    'name': 'Fremskrittspartiet',
+                    'desc': 'This party has openly stated they are Neo-liberalist in nature, advocating privatization and deregulization',
+                    'bg': '',
+                    'pros': 'Close to your ideology',
+                    'cons': 'It is largely believed they are more right-wing populistic than neo-liberal (especially socially)'
+                },
+                'Høyre': {
+                    'name': 'Høyre',
+                    'desc': 'While not quite neo-liberalist, they share similar views with Frp on economics. They want to conserve the current system of today, but are willing to push for privatization',
+                    'bg': '',
+                    'pros': 'Somewhat close to your ideology',
+                    'cons': "They don't differ a lot from Arbeiderpartiet (Social democrats), not exactly a neo-libs cup of coffee."
+                }
+            }
+        },
+        'books': [{
+            0: {
+                'name': 'A Brief History of Neo-Liberalism',
+                'bg': 'http://t0.gstatic.com/images?q=tbn:ANd9GcRoq1fFSP_apekUJVABU2xBFr9yeUyRTUFBSI4Eqlg9sZ2ZSX7y',
+                'link': 'https://www.google.no/search?q=A+Brief+History+of+Neoliberalism&stick=H4sIAAAAAAAAAGVTPY7UMBglBWjJDtKSEc1UCFFQICVOJsmEFiGExAoJtqCzNk6cmcRxfmzZsY-xHTUtF2EOQElBxw0o2UXjOBLls5_fz2f77P4z12_9IKFkx4ZwTcuOHPJyvCYH1j7Nu65hR2fBODqP_MoHIE8HHEGGj87qDu_R0Mc72ZygKmSCazKeYJhTjSqOTkqhTkeQGDBKFOaWWGk14Bn2JG8RmE1lzwfY89O2DgWQDO9ndjvta9HPkPVxO9CTDwK8IMJSG1BMc76iJRGFwvqoHiatLSuxhD0xkRMyBUFiMw6Tkv1CuQZhu5Bie0iQwSgRkFExWbquVMSNcop3emv3-BYEtn2CZIx1vpjGGHEV2yCxQDSdnYDEGumFU8M4Kix7hznSdlitCJEyORCrRm0mF6VxwheFKMCpTRET2WfpXBjFWSNwn824jYO4SVMbgza1Iubd1EEwDXFhfLNoh5tlQYn5zh7d6olQW7BvAdS2P033wWjuVJGtSjmcDLvQHEARjAbjCUbTgNlspkRV18K8drStMlL9cr465xe___xcb744N9--_3BuHPfifdexkqiPJbnmZXHVec_dB28oP3DlbdzV5uzuPA0z-OLexnVn5H12zz-V_Kq77IoDVt4776378LJsbz8b-4C9V677uiOkRPzQUe-l-2Tz2Efzgv_vJ94Krt3_l1d_AfAElX7FAwAA&npsic=0&sa=X&ved=0ahUKEwimo7mI4cfWAhVkMJoKHSxhA9QQ-BYINA'
+            },
+            1: {
+                'name': 'Never Let a Serious Crisis Go to Waste: How Neoliberalism Survived the Financial Meltdown',
+                'bg': 'http://t3.gstatic.com/images?q=tbn:ANd9GcSpk_t5e9rQwZtF95um720Bgr2SLL-c5jrPy_gdhQWSodVNImLE',
+                'link': 'https://www.google.no/search?sa=X&q=Never+Let+a+Serious+Crisis+Go+to+Waste:+How+Neoliberalism+Survived+the+Financial+Meltdown&stick=H4sIAAAAAAAAAGVTv27UMBwmA6i4h1RSsdyEEAMDUuLkkly6IoSQqJCgA1vUOHHuEsdxYiuO_RjdmFl5Ee4BGBnYeANGWnSOgxg_-_P352f75P6zlVd5cId6Fm1lE5zTsiP7vByuyZ63T_Oua_jBAV7r-TElW94fnEd3B2Ce9DjMOD44_wgcoSpkjGsyHGGQU40qgY5KgU4GGBswSBTkllhp1eMZMpK3CM6mkok-Y-K4rYMRSo53M7uddvXIZshZ1Pb06IOgKMhoqQ0spjlf0ZKQZqP1USyLW1tWYpkxYiLHZPL92GbsJyXZQrmGQbuQ4ruMIINRPGacjpOl60qFwigneKs3dk9soG_bx0hGWOeLaQyhUJENEo2IJrMTlFgjvXBquECFZW-xQNoOqx0DpEwOxKtBm8mFSRSLRSEKcWJTRESyNJkLoyhtRszSGbeRHzVJYmPQplbEvJva96c-KoxvGm5xsywosdjaoxs9EWoLshZm2vanyc4fzJ0qslGJyCbDLrSA2egPBuMpC6ce89lMjVVdj-a1o02Vkuqn88U5Pfv1-8f5-rNz8_Xbd-fGAWfvuo6XRH0oybUoi6vOfQ4evKZiL5S7Bqv1yd15GqTZi3trAGbkfgKnH0tx1V12xR4r9637Bjy8LNvbz8bfY_cCgFcdISUS-466L8GT9WMPzQve3594K3gO_l9e_QGPDe0ixwMAAA&npsic=-11&ved=0ahUKEwis3c6S4cfWAhVEYJoKHX0hDREQ-BYIOg'
+            }
+        }
+        ]
     },
     {
         "name": "Classical Liberalism",

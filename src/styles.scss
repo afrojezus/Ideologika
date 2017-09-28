@@ -212,10 +212,8 @@ html, body {
 
 .frame {
     display: flex;
-    height: 100vh;
     width: 100%;
     flex-direction: column;
-
     .appbar {
         height: 38px;
         -webkit-app-region: drag;
@@ -271,10 +269,6 @@ html, body {
                 }
             }
         }
-    }
-
-    .context {
-        overflow: scroll;
     }
 }
 
@@ -455,6 +449,24 @@ html, body {
     background: rgba(#FFF, .96);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(#111, .1);
+  }
+}
+
+.identity {
+  display: flex;
+  flex-flow: column wrap;
+  text-align: right;
+  margin-top: -4px;
+  margin-right: -8px;
+  h2 {
+    font-weight: 600;
+    color: rgba(#111, .5);
+    font-size: 1em;
+    text-transform: uppercase;
+    margin-bottom: -4px;
+  }
+  h1 {
+    font-size: 1.5em;
   }
 }
 
@@ -757,6 +769,36 @@ h1, h2, h3, h4, h5, h6, p, span, strong, small, input, form, a, i, b, code, bloc
   .vertPadding {
      padding-top: 48px !important;
   }
+    .proscons {
+      flex-flow: column wrap;
+      .probox {
+        margin-top: 16px;
+      }
+    }
+
+    .thecompasso {
+      width: 320px !important;
+      height: 320px !important;
+    }
+
+    .header {
+      h1.large {
+        font-size: 2em;
+      }
+      h2.large {
+        font-size: 1.1em;
+      }
+    }
+
+    .counter {
+      top: 63%;
+      font-size: 0.4em;
+    }
+
+    .indicator {
+      top: 58%;
+      font-size: 0.6em;
+    }
 }
 
 .searchBar {
@@ -1017,4 +1059,47 @@ progress.darkblue::-webkit-progress-value {
 
 progress.orange::-webkit-progress-value {
   background-color: orange;
+}
+
+#compass-indicator, .example-indicator {
+  transform: translate(-50%,-50%);
+}
+
+.party {
+  box-shadow: 0 4px 24px rgba(#000, .05);
+  padding: 16px !important;
+  margin: 8px !important;
+  border-radius: 24px;
+  position: relative;
+  min-height: 250px;
+  text-align: center;
+  img {
+    width: 100px;
+    border-radius: 2px;
+    box-shadow: 0 6px 24px rgba(#000, .17);
+  }
+
+  h1 {
+    font-size: 1.3em;
+  }
+  span {
+    font-size: 0.9em;
+  }
+  .proscons {
+    border-top: 1px solid rgba(#000, .1);
+    display: flex;
+    text-align: initial;
+    margin-top: 16px;
+    padding: 16px;
+    .probox {
+      flex: 1;
+      h1 {
+        font-weight: 600;
+      }
+      h2 {
+        font-weight: 400;
+        font-size: 0.9em;
+      }
+    }
+  }
 }

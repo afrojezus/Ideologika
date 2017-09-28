@@ -3,6 +3,7 @@ import Grid from 'material-ui/Grid';
 import {
     HashRouter, Route, Switch, NavLink
 } from 'react-router-dom';
+import localForage from 'localforage';
 
 import questions from './8values/questions.js';
 import ideologies from './8values/ideologies.js';
@@ -150,10 +151,10 @@ class Quest extends React.Component {
                 <h2 className='large'>{this.state.questionCount}</h2>
                 <h1 id='question' className='large'>{this.state.question}</h1>
             </div>
-            <div className='header' style={{position: 'fixed', display: 'flex', bottom: 392, textAlign: 'center', justifyContent: 'center', left: '50%', transform: 'translate(-50%, -50%)'}}>
+            <div className='header indicator' style={{position: 'fixed', display: 'flex', bottom: 392, textAlign: 'center', justifyContent: 'center', left: '50%', transform: 'translate(-50%, -50%)'}}>
             <h2>You seem to be leaning towards {this.state.ideology}...</h2>
             </div>
-            <div className='header' style={{position: 'fixed', display: 'flex', bottom: 256, textAlign: 'center', justifyContent: 'center', left: '50%', transform: 'translate(-50%, -50%)'}}>
+            <div className='header counter' style={{position: 'fixed', display: 'flex', bottom: 256, textAlign: 'center', justifyContent: 'center', left: '50%', transform: 'translate(-50%, -50%)'}}>
             <h2 style={{margin: '0 16px'}}>Economic Axis
             <br />
             <h1>{this.state.econ}</h1></h2>
@@ -208,8 +209,11 @@ class Result extends React.Component {
             diplomaticLabel: '',
             stateLabel: '',
             societyLabel: '',
+            ideologyInt: 0,
             ideologyBG: '',
-            ideologyLogo: ''
+            ideologyLogo: '',
+            country: '',
+            ideologyParties: {}
         }
     }
 
@@ -252,6 +256,8 @@ class Result extends React.Component {
                             ideodist = dist
                             this.setState({
                                 ideology: ideologies[i].name,
+                                ideologyParties: ideologies[i].country ? ideologies[i].country : null,
+                                ideologyBooks: ideologies[i].books ? ideologies[i].books : null,
                                 ideologyBG: ideologies[i].bg
                             }, () => {       
                                     this.visualize();
@@ -264,10 +270,21 @@ class Result extends React.Component {
         })   
     }
 
+    async componentDidMount() {
+        try {
+        const country = await this.getIPDetails();
+        if (country)
+            this.setState({country}, async () => {
+                await localForage.setItem('yourIdeology', this.state);
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     getQueryVariable(variable)
     {
            var query = this.props.location.search.substring(1)
-           console.log(query)
            var vars = query.split("&")
            for (var i=0;i<vars.length;i++) {
                    var pair = vars[i].split("=")
@@ -300,7 +317,6 @@ class Result extends React.Component {
 
 
     visualize() {
-
     }
 
     loadGraphics () {
@@ -356,6 +372,20 @@ class Result extends React.Component {
         ctx.fillText("Societal Axis: " + document.getElementById("society-label").innerHTML, 400, 485)
     }
 
+    async getIPDetails() {
+        try {
+            const countrydata = await fetch('https://ipapi.co/json/');
+            if (countrydata) {
+                const data = await countrydata.json();
+                return data;
+            }
+            else
+                return new Error('Oof.');
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     render() {
         return (
             <div>
@@ -366,10 +396,10 @@ class Result extends React.Component {
         </div>
             <main className='main'>
             <Grid container className='horiPadding vertPadding' spacing={0}>
-            <NavLink className='glink' to='/' exact style={{zIndex: 90000000000000, marginTop: 32}}><i className='mdi mdi-arrow-left' /> Back</NavLink>
+            <NavLink className='glink' to='/' exact style={{zIndex: 90000000000000}}><i className='mdi mdi-arrow-left' /> Back</NavLink>
             <div className='header'>
                 <h2 className='large'>Results</h2>
-                <h1 id='mainTitle' className='large'>You got {this.state.ideology}</h1>
+                <h1 className='large'>You got {this.state.ideology}</h1>
             </div>
             <div className='header'>
             <h2>{this.state.economicLabel} on Economics</h2>
@@ -393,14 +423,14 @@ class Result extends React.Component {
         </div>
         <div className='header' style={{textAlign: 'center', justifyContent: 'center', width: '100%', display: 'flex', flexFlow: 'column wrap'}}>
         <h1 style={{marginBottom: 16}}>Your position on the political compass</h1>
-        <div style={{
+        <div className='thecompasso' style={{
             width: 512,
             height: 512,
             background: '#FFF',
             border: '1px solid rgba(0,0,0,.2)',
             borderRadius: '24px',
             alignSelf: 'center',
-            position: 'relative'
+            position: 'relative',
         }}>
         <div style={{
             width: '100%',
@@ -422,15 +452,221 @@ class Result extends React.Component {
             right: '50%',
             bottom: 0
         }} />
+        <h2 style={{
+            position: 'absolute',
+            top: '16px',
+            textAlign: 'center',
+            color: 'rgba(0,0,0,.3)',
+            fontWeight: 600,
+            fontSize: '1em',
+            width: '100%'
+        }}>Totalitarian
+        </h2>
+        <h2 style={{
+            position: 'absolute',
+            bottom: '16px',
+            textAlign: 'center',
+            color: 'rgba(0,0,0,.3)',
+            fontWeight: 600,
+            fontSize: '1em',
+            width: '100%'
+        }}>Anarchy
+        </h2>
+        <h2 style={{
+            position: 'absolute',
+            left: '-62px',
+            textAlign: 'center',
+            color: 'rgba(0,0,0,.3)',
+            fontWeight: 600,
+            fontSize: '1em',
+            top: '50%',
+            bottom: '50%',
+            transform: 'rotate(-90deg)'
+        }}>Collectivistic (Left)
+        </h2>
+        <h2 style={{
+            position: 'absolute',
+            right: '-70px',
+            textAlign: 'center',
+            color: 'rgba(0,0,0,.3)',
+            fontWeight: 600,
+            fontSize: '1em',
+            top: '50%',
+            bottom: '50%',
+            transform: 'rotate(90deg)'
+        }}>Individualistic (Right)
+        </h2>
+        <div id='compass-indicator' style={{
+            position: 'absolute',
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            background: '#333',
+            boxShadow: '0 4px 26px rgba(0,0,0,.17)',
+            border: '1px solid rgba(0,0,0,.2)',
+            display: 'flex',
+            top: `calc(${this.state.liberty + '%'})`,
+            left: `calc(${this.state.wealth + '%'})`
+        }}>
+        <h2 style={{
+            verticalAlign: 'middle',
+            fontSize: '0.8em',
+            fontWeight: 500,
+            marginLeft: 28,
+            lineHeight: '25px',
+            textAlign: 'center'
+        }}>You</h2>
+        </div>
+        <div className='example-indicator' style={{
+            position: 'absolute',
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            background: '#FFF',
+            boxShadow: '0 4px 26px rgba(0,0,0,.17)',
+            border: '1px solid rgba(0,0,0,.2)',
+            display: 'flex',
+            top: `20%`,
+            left: `80%`
+        }}>
+        <h2 style={{
+            verticalAlign: 'middle',
+            fontSize: '0.8em',
+            fontWeight: 500,
+            marginLeft: 28,
+            lineHeight: '25px',
+            textAlign: 'center',
+            whiteSpace: 'nowrap'
+        }}>Trump</h2>
+        </div>
+        <div className='example-indicator' style={{
+            position: 'absolute',
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            background: '#FFF',
+            boxShadow: '0 4px 26px rgba(0,0,0,.17)',
+            border: '1px solid rgba(0,0,0,.2)',
+            display: 'flex',
+            top: `30%`,
+            left: `60%`
+        }}>
+        <h2 style={{
+            verticalAlign: 'middle',
+            fontSize: '0.8em',
+            fontWeight: 500,
+            marginLeft: 28,
+            lineHeight: '25px',
+            textAlign: 'center',
+            whiteSpace: 'nowrap'
+        }}>Hillary Clinton</h2>
+        </div>
+        <div className='example-indicator' style={{
+            position: 'absolute',
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            background: '#FFF',
+            boxShadow: '0 4px 26px rgba(0,0,0,.17)',
+            border: '1px solid rgba(0,0,0,.2)',
+            display: 'flex',
+            top: `50%`,
+            left: `40%`
+        }}>
+        <h2 style={{
+            verticalAlign: 'middle',
+            fontSize: '0.8em',
+            fontWeight: 500,
+            marginLeft: 28,
+            lineHeight: '25px',
+            textAlign: 'center',
+            whiteSpace: 'nowrap'
+        }}>Bernie Sanders</h2>
+        </div>
+        <div className='example-indicator' style={{
+            position: 'absolute',
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            background: '#FFF',
+            boxShadow: '0 4px 26px rgba(0,0,0,.17)',
+            border: '1px solid rgba(0,0,0,.2)',
+            display: 'flex',
+            top: `5%`,
+            left: `0%`
+        }}>
+        <h2 style={{
+            verticalAlign: 'middle',
+            fontSize: '0.8em',
+            fontWeight: 500,
+            marginLeft: 28,
+            lineHeight: '25px',
+            textAlign: 'center',
+            whiteSpace: 'nowrap'
+        }}>Stalin</h2>
+        </div>
+        <div className='example-indicator' style={{
+            position: 'absolute',
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            background: '#FFF',
+            boxShadow: '0 4px 26px rgba(0,0,0,.17)',
+            border: '1px solid rgba(0,0,0,.2)',
+            display: 'flex',
+            top: `0%`,
+            left: `45%`
+        }}>
+        <h2 style={{
+            verticalAlign: 'middle',
+            fontSize: '0.8em',
+            fontWeight: 500,
+            marginLeft: 28,
+            lineHeight: '25px',
+            textAlign: 'center',
+            whiteSpace: 'nowrap'
+        }}>Hitler</h2>
         </div>
         </div>
-        <div className='header' style={{textAlign: 'center'}}>
+        </div>
+        <div className='header'>
         <h1 style={{marginBottom: 16}}>Recommended literature on about {this.state.ideology}</h1>
+        <Grid container spacing={8}>
+        {this.state.ideologyBooks ?
+            Object.values(this.state.ideologyBooks[0]).map((book, o) => (
+                <Grid item xs className='party' key={o}>
+                    <img src={book.bg} alt='' />
+                    <h1>{book.name}</h1>
+                </Grid>
+            ))
+            : <h2>Appears the library closed down.</h2>}
+        </Grid>
         </div>
-        <div className='header' style={{textAlign: 'center'}}>
-        <h1 style={{marginBottom: 16}}>{this.state.ideology.replace('ism', 'ist')} parties in your country</h1>
+        <div className='header'>
+        <h1 style={{marginBottom: 16}}>{this.state.ideology.replace('ism', 'ist')} parties in {this.state.country.country_name}</h1>
+        <Grid container spacing={16}>
+        {this.state.ideologyParties ? this.state.ideologyParties.hasOwnProperty(this.state.country.country) ? 
+            Object.values(this.state.ideologyParties[this.state.country.country]).map((party, o) => (
+                <Grid item xs className='party' key={o}>
+                    <img src={party.bg} alt='' />
+                    <h1>{party.name}</h1>
+                    <span>{party.desc}</span>
+                    <div className='proscons'>
+                    <div className='probox'>
+                    <h1>Pros</h1>
+                    <h2>{party.pros}</h2>
+                    </div>
+                    <div className='probox'>
+                    <h1>Cons</h1>
+                    <h2>{party.cons}</h2>
+                    </div>
+                    </div>
+                </Grid>
+            ))
+            : <h2>It appears your country is not supported yet</h2> : <h2>Info not avaliable yet</h2>}
+        </Grid>
         </div>
-        <div className='header' style={{textAlign: 'center'}}>
+        <div className='header'>
         <h1 style={{marginBottom: 16}}>Don't feel like it's your ideology? Here's the closest alternatives</h1>
         </div>
         </Grid>

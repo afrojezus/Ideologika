@@ -628,6 +628,15 @@ const questions = [
             "govt": -10,
             "scty": -10
         }
+    },
+    {
+        "question": 'Do you believe the Jews are the main root of all problems?',
+        "effect": {
+            "econ": 0,
+            "dipl": -10000,
+            "govt": -20,
+            "scty": -50
+        }
     }
 ]
 
